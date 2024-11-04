@@ -12,9 +12,10 @@ import { useState } from "react";
 
 type Props = {
     postagens: Postagens;
+    hideComments?: boolean;
 }
 
-export const PostagensItem = ({postagens}: Props) => {
+export const PostagensItem = ({postagens, hideComments}: Props) => {
     const [liked, setLiked] = useState(postagens.liked);
 
     const handleLikeButton = () => {
@@ -50,15 +51,16 @@ export const PostagensItem = ({postagens}: Props) => {
                     </div>
                 }
                 <div className="flex mt-6 text-gray-500">
+                    {!hideComments && 
                     <div className="flex-1">
                         <Link href={`/postagens/${postagens.id}`}>
                             <div className="inline-flex items-center gap-2 curso-pointer">
                                 <FontAwesomeIcon icon={faComment} className="size-6" />
                                 <div className="text-lg">{postagens.commentCount}</div>
                             </div>
-                            
                         </Link>
                     </div>
+                    }
                     <div className="flex-1">
                         <div className="inline-flex items-center gap-2 curso-pointer">
                             <FontAwesomeIcon icon={faRetweet} className="size-6" />
