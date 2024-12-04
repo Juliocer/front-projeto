@@ -4,20 +4,29 @@ import { user } from "@/data/user"
 import { faImage } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Button } from "../ui/button"
+import Link from "next/link"
+import { GeneralHeader } from "../ui/general-header"
+import { NavItem } from "../nav/nav-item"
+import router, { useRouter } from "next/navigation"
 
 
 export const PostagensPost = () => {
-    
+    const router = useRouter();
+
     const handleImageUpload = () => {
 
     }
 
     const handlePostClick = () => {
+        
+    }
 
+    const handleEnterButton = () => {
+        router.replace('/formulario');
     }
     
     return(
-        <div className="flex gap-6 px-8 py-6 border-b-2 border-gray-900">
+        <div className="flex gap-3 px-4 py-3 border-b-2 border-gray-900">
             <div>
                 <img 
                     src={user.avatar}
@@ -27,22 +36,12 @@ export const PostagensPost = () => {
             </div>
 
             <div className="flex-1">
-                <div 
-                    className="min-h-14 outline-none text-lg text-white empty:before:text-gray-500 empty:before:content-[attr(data-placeholder)]"
-                    contentEditable
-                    role="testbox"
-                    data-placeholder="O que está acontecendo?"
-                ></div>
-                <div className="flex justify-between items-center mt-2">
-                    <div onClick={handleImageUpload} className="cursor-pointer">
-                        <FontAwesomeIcon icon={faImage} className="size-6" />
-                    </div>
+                <div className="flex justify-center items-center mt-1 ">
                     <div className="w-28">
-                        <Button
-                            label="Postar"
-                            size={2}
-                            onClick={handlePostClick}
-                        />
+                        <Button 
+                            label="Postar" 
+                            size={2} 
+                            onClick={handleEnterButton}/>
                     </div>
                 </div>
             </div>

@@ -10,3 +10,8 @@ body {
   background-color: #000;
   color: #fff;
 }
+
+.dark body {
+  background-color: #000; /* Fundo escuro */
+  color: #fff;            /* Texto claro */
+}

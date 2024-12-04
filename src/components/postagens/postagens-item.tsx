@@ -8,6 +8,9 @@ import { faRetweet, faHeart as faHeardFilled } from "@fortawesome/free-solid-svg
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useState } from "react";
+import { Button } from "../ui/button";
+import router from "next/dist/client/router";
+
 
 
 type Props = {
@@ -17,32 +20,55 @@ type Props = {
 
 export const PostagensItem = ({postagens, hideComments}: Props) => {
     const [liked, setLiked] = useState(postagens.liked);
-
+    
+    const handleEnterButton = () => {
+        router.replace('/home');
+    }
+    
     const handleLikeButton = () => {
         setLiked(!liked)
     }
 
     return (
-        <div className="flex gap-2 p-6 border-b-2 border-gray-900">
-            <div>
+        <div className="flex gap-1 p-3 border-b-2 border-gray-900">
+            <div className="flex-shrink-0">
                 <Link href={`/${postagens.user.slug}`}>
                     <img 
                         src={postagens.user.avatar} 
                         alt={postagens.user.name}
-                        className="size-10 rounded-full"
+                        className="w-10 h-10 rounded-full"
                     />
                 </Link>
             </div>
+
             <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-x-3">
-                    <div className="">
+                    <div className="ml-2 mt-2">
                         <Link href={`/${postagens.user.slug}`}>{postagens.user.name}</Link>
                     </div>
-                    <div className="text-xs text-gray-500">@{postagens.user.slug} - {formatRelativeTime(postagens.dataPost)}</div>
+                    <div className="text-xs text-gray-500 mt-2">@{postagens.user.slug} - {formatRelativeTime(postagens.dataPost)}</div>
                 </div>
-                <div className="py-4 text-lg">{postagens.body}</div>
+
+                <div className="flex px-2 py-2 items-center justify-center">
+                    <div className="flex-1">
+                        <div className=" text-lg py-1 w-3/4 truncate" title={postagens.body}>
+                            {postagens.body}
+                        </div>
+                    </div>
+                    <div className="flex-1">
+                        <div className="flex justify-end items-center">
+                            <div className="w-28">
+                                <Button 
+                                label="Ver mais" 
+                                size={3} 
+                                onClick={handleEnterButton}/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {postagens.image && 
-                    <div className="w-full">
+                    <div className="w-full mt-2">
                         <img 
                             src={postagens.image} 
                             alt="" 
@@ -50,26 +76,20 @@ export const PostagensItem = ({postagens, hideComments}: Props) => {
                         />
                     </div>
                 }
-                <div className="flex mt-6 text-gray-500">
+                <div className="flex justify-center items-center mt-3 text-gray-500">
                     {!hideComments && 
                     <div className="flex-1">
                         <Link href={`/postagens/${postagens.id}`}>
-                            <div className="inline-flex items-center gap-2 curso-pointer">
-                                <FontAwesomeIcon icon={faComment} className="size-6" />
+                            <div className="ml-20 flex items-center justify-center gap-2 curso-pointer">
+                                <FontAwesomeIcon icon={faComment} className="h-6 w-6" />
                                 <div className="text-lg">{postagens.commentCount}</div>
                             </div>
                         </Link>
                     </div>
                     }
                     <div className="flex-1">
-                        <div className="inline-flex items-center gap-2 curso-pointer">
-                            <FontAwesomeIcon icon={faRetweet} className="size-6" />
-                            <div className="text-lg">{postagens.retweetCount}</div>
-                        </div>
-                    </div>
-                    <div className="flex-1">
-                        <div onClick={handleLikeButton} className={`inline-flex items-center gap-2 cursor-pointer ${liked && 'text-red-400'}`}>
-                            <FontAwesomeIcon icon={liked ? faHeardFilled : faHeart} className="size-6" />
+                        <div onClick={handleLikeButton} className={`ml-2 inline-flex gap-2 cursor-pointer ${liked && 'text-red-400'}`}>
+                            <FontAwesomeIcon icon={liked ? faHeardFilled : faHeart} className="h-6 w-6" />
                             <div className="text-lg">{postagens.likeCount}</div>
                         </div>
                     </div>
@@ -78,3 +98,4 @@ export const PostagensItem = ({postagens, hideComments}: Props) => {
         </div>
     );
 }
+
