@@ -16,8 +16,7 @@ export default function Page(){
                 <div className="text-xs text-gray-500">{user.postCount} posts</div>
             </GeneralHeader>
             
-            <section className="border-b-2 border-gray-500">
-                
+            <section>
                 <div className="bg-gray-500 h-28 bg-no-repeat bg-cover bg-center"
                 style={{backgroundImage: 'url('+ user.cover +')'}}
                 ></div>
@@ -30,7 +29,7 @@ export default function Page(){
                     />
                     <div className="w-32">
                         {isMe && 
-                        <Link href={`/${user.slug}/edit`}>
+                        <Link href={`/${user.slug}/editar-perfil`}>
                             <Button label="Editar Perfil" size={2} />
                         </Link>
                         }
@@ -40,7 +39,7 @@ export default function Page(){
                     </div>
                 </div>
 
-                <div className="px-6 mt-4">
+                <div className="px-6 mt-4 mb-8">
                     <div className="text-xl font-bold">{user.name}</div>
                     <div className="text-gray-500">@{user.slug}</div>
                     <div className="py-5 text-lg text-gray-500">{user.bio}</div>
@@ -50,14 +49,8 @@ export default function Page(){
                             <Link href={user.link} target="_blank" className="text-blue-300">{user.link}</Link>
                         </div>
                     }
-
-                    <div className="my-5 flex gap-6">
-                        <div className="text-xl text-gray-500"><span className="text-white">99</span> Seguindo</div>
-                        <div className="text-xl text-gray-500"><span className="text-white">99</span> Seguidores</div>
-                    </div>
                 </div>
-            </section>
-            <ProfileFeed />
+            </section> 
         </div>
     )
 }

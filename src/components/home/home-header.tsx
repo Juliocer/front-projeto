@@ -12,7 +12,7 @@ export const HomeHeader = () => {
     return (
         <header className=" lg:hidden flex justify-between p-6 border-b-2 border-gray-900">
             <div className="lg:hidden">
-            <Logo size={24}/>
+            <Logo size={125}/>
             </div>
             <div className="hidden lg:block text-2xl">Pagina Inicial</div>
 

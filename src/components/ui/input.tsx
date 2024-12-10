@@ -1,34 +1,35 @@
-"use client"
-
 import { faEye, faEyeSlash, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { KeyboardEvent, useState } from "react";
 
-type Props ={
+type Props = {
     placeholder: string;
     password?: boolean;
     value?: string;
-    onChange?: (newValue: string) => void;
+    onChange?: (newValue: string) => void;  // Tipagem corrigida para passar apenas o valor
     filled?: boolean;
     icon?: IconDefinition;
     onEnter?: () => void;
 }
 
-export const Input = ({placeholder, password , icon , value, filled, onChange, onEnter}: Props)  => {
+export const Input = ({ placeholder, password, icon, value, filled, onChange, onEnter }: Props) => {
     const [showPassword, setShowPassword] = useState(false);
     
     const handleKeyUp = (event: KeyboardEvent<HTMLInputElement>) => {
-        if ((event.code.toLowerCase() === "enter" || event.code.toLocaleLowerCase() === "numpadenter") && onEnter){
-                onEnter();
-            }
+        if ((event.code.toLowerCase() === "enter" || event.code.toLocaleLowerCase() === "numpadenter") && onEnter) {
+            onEnter();
+        }
     }
 
     return (
-        <div className={`has-[:focus]:border-white flex items-center h-14 rounded-3xl border-2 border-gray-700 ${filled && 'bg-gray-700'}`}>
+        <div className={`mt-4 flex items-center h-14 rounded-3xl border transition-all duration-300 
+            ${filled ? 'bg-gray-500 dark:bg-gray-700' : 'bg-transparent'} 
+            border-gray-300 dark:border-gray-600`}
+        >
             {icon && 
                 <FontAwesomeIcon 
                     icon={icon}
-                    className="ml-4 size-6 text-gray-500"
+                    className="ml-4 size-6 text-gray-100"
                 />
             }
             <input 
@@ -36,7 +37,7 @@ export const Input = ({placeholder, password , icon , value, filled, onChange, o
                 className="flex-1 outline-none bg-transparent h-full px-4"
                 placeholder={placeholder}
                 value={value}
-                onChange={e => onChange && onChange(e.target.value)}
+                onChange={e => onChange && onChange(e.target.value)}  // Passando o valor para o onChange
                 onKeyUp={handleKeyUp}
             />
             {password &&

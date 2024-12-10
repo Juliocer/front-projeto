@@ -2,9 +2,10 @@ type Props = {
     placeholder: string;
     rows: number;
     value?: string;
+    onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; // Adicionando onChange
 }
 
-export const Textarea = ({placeholder, rows, value}: Props) => {
+export const Textarea = ({ placeholder, rows, value, onChange }: Props) => {
     return (
         <div className="has-[:focus]:border-white flex items-center rounded-3xl border-2 border-gray-700">
             <textarea 
@@ -12,6 +13,7 @@ export const Textarea = ({placeholder, rows, value}: Props) => {
                 placeholder={placeholder}
                 value={value}
                 rows={rows}
+                onChange={onChange} // Passando a função onChange para o <textarea>
             ></textarea>
         </div>
     );

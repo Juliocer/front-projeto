@@ -34,3 +34,4 @@ export const SearchInput = ({defaultValue, hideOnSearch}: Props) => {
         />
     );
 }
+

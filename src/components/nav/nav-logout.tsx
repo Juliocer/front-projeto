@@ -9,7 +9,7 @@ export const NavLogout = () => {
     const router = useRouter();
 
     const handleClick = () => {
-        router.replace('/signin');
+        router.replace('/login');
     }
 
     return (
